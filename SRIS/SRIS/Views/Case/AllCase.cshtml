@@ -1,0 +1,257 @@
+﻿@model SRIS.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "全部案例";
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
+}
+<body>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        @Html.ActionLink("首页", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("全部案例", "AllCase", "Case")
+                    </li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div style="margin-left: 20px; margin-top:20px">
+               
+                <div class="demoTable">
+                    <form class="layui-form layui-form-pane">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 案例编号：</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" id="txt_CaseCode" autocomplete="off">
+                            </div>
+
+                            <label class="layui-form-label"> 寻亲类别：</label>
+                            <div class="layui-input-inline">
+                                <select id="txt_sl_SRTypeId">
+                                    <option value="" selected="selected">==请选择==</option>
+                                    <option value="712B6DF7-0964-40A1-A877-37215D6B48AC">家寻亲人</option>
+                                    <option value="74C2B3D5-7432-49DC-AC5E-E9E0B39506AC">家寻送养</option>
+                                    <option value="D283C991-2B73-4F31-B439-6BFBB5AB94E6">亲人寻家</option>
+                                    <option value="D7D39E3D-73B8-4811-AE41-58156450E9D0">战友情深</option>
+                                    <option value="A20836C8-AE2B-4F0D-BECB-AF369DCBE694">感恩寻人</option>
+                                    <option value="5F52FFA4-9951-4A68-990F-C02886E4B973">寻找老友</option>
+                                    <option value="16982AC2-9966-4E45-A360-B253C4381E64">其他寻人</option>
+                                    <option value="0D2296D4-2047-450A-9E00-2B73CE91F7C0">台海寻亲</option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label">被寻人姓名：</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" id="txt_BeSeekerName" autocomplete="off">
+                            </div>
+                            <label class="layui-form-label"> 领任务时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="date" class="layui-input" id="txt_getTaskDate" autocomplete="off">
+                            </div>
+                        </div>
+                    </form>
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                    <button id="btn_Create" class="layui-btn">新建</button>
+                </div>
+                
+
+                <table class="layui-hide" id="test"></table>
+            </div>
+
+            <script type="text/html" id="barDemo">
+                <a onclick="gjxq('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">跟进详情</a>
+                <a onclick="LinkManInfo('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-sm layui-btn-xs" lay-event="detail">联系人信息</a>
+                <button onclick="btn_ydbbhj('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-sm layui-btn-normal">引导宝贝回家</button>
+                <a onclick="btn_SetSuccess('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-xs" lay-event="edit">设置成功案例</a>
+                <button onclick="btn_ReturnTask('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-sm layui-btn-normal">退任务</button>
+                <a onclick="btn_Edit('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                <a onclick="Del('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+            </script>
+
+            <script type="text/html" id="djLink">
+                <a href="{{d.RegisterLink}}" class="layui-table-link" target="_blank">{{ d.RegisterLink }}</a>
+            </script>
+
+            <script type="text/html" id="ftLink">
+                <a href="{{d.PostLink}}" class="layui-table-link" target="_blank">{{ d.PostLink }}</a>
+            </script>
+
+            <script>
+                layui.use('table', function () {
+                    var table = layui.table;
+
+                    var tableIns = table.render({
+                        elem: '#test'
+                      , url: '/Case/GetAllCase'
+                        //, cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                      , cols: [[
+                        { field: 'CaseCode', title: '案例编号', width: '120' }
+                        , { field: 'SRTypeName', title: '寻亲类别', width: '100' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        , { field: 'Title', title: '标题', width: '150' }
+                        , { field: 'BeSeekerName', title: '被寻人姓名', width: '100' }
+                        , { field: 'getTaskDate', title: '领任务时间', width: '100' }
+                        , { field: 'RegisterLink', templet: '#djLink', title: '登记信息', align: 'center', width: '100' } //单元格内容水平居中
+                        , { field: 'PostLink', templet: '#ftLink', title: '发帖链接', align: 'left', width: '100' } //单元格内容水平居中
+                        , { field: 'Remarks', title: '备注', align: 'left', width: '150' }
+                        , { field: 'right', title: '操作', align: 'left', toolbar: '#barDemo', width: '550' }
+                      ]]
+                      , id: 'testReload'
+                      , page: true
+                      , limits: [10, 20, 30, 50, 80, 100]
+                    });
+
+                    // 搜索
+                    var $ = layui.$, active = {
+                        reload: function () {
+                            //执行重载
+                            table.reload('testReload', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                              , where: {
+                                  whereStr: JSON.stringify(
+                                      {
+                                          caseCode: $("#txt_CaseCode").val(),
+                                          srTypeId: $("#txt_sl_SRTypeId").val(),
+                                          beSeekerName: $("#txt_BeSeekerName").val(),
+                                          getTaskDate: $("#txt_getTaskDate").val()
+                                      })
+                              }
+                            });
+                        }
+                    };
+
+                    $('.demoTable .layui-btn').on('click', function () {
+                        var type = $(this).data('type');
+                        active[type] ? active[type].call(this) : '';
+                    });
+                });
+
+                $(function () {
+                    // 新建
+                    $("#btn_Create").click(function () {
+                        window.location.href = "/Case/CreateCase";
+                    });
+
+                })
+
+                // 联系人信息
+                function LinkManInfo(id) {
+                    layer.open({
+                        type: 2,
+                        area: ['500px', '450px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        title: '联系人信息',
+                        content: '/Case/EditLinManInfo?id=' + id
+                    });
+                }
+
+                // 编辑案例信息
+                function btn_Edit(id) {
+                    window.location.href = "/Case/CreateCase?id=" + id;
+                };
+
+                // 删除
+                function Del(id) {
+                    layer.confirm('确定删除该信息？', {
+                        btn: ['确定', '取消'] //按钮
+                    }, function () {
+                        $.post("/Case/DelRegisterInfo", { Id: id }, function (data) {
+                            if (data.state) {
+                                layer.msg(data.message, { icon: 1 }, function () {
+                                window.location.reload();
+                                });
+                            }
+                            else {
+                                layer.msg(data.message, { icon: 2 });
+                                return false;
+                            }
+                        }, "json")
+                    }, function () {
+                        // 取消
+                    });
+                };
+
+                // 引导宝贝回家
+                function btn_ydbbhj(id) {
+                    layer.confirm('确定引导到宝贝回家？', {
+                        btn: ['确定', '取消'] //按钮
+                    }, function () {
+                        // 确定引导
+                        $.post("/Case/ydbbhj", { id: id }, function (data) {
+                            if (data.state) {
+                                layer.msg(data.message, { icon: 1 }, function () {
+                                window.location.reload();
+                                });
+                            }
+                            else {
+                                layer.msg(data.message, { icon: 2 });
+                                return false;
+                            }
+                        })
+                    }, function () {
+                        // 取消
+                    });
+                }
+
+
+                // 设置成功案例
+                function btn_SetSuccess(id) {
+                    layer.confirm('确定设置为成功案例？', {
+                        btn: ['确定', '取消'] //按钮
+                    }, function () {
+                        $.post("/Case/SetSuccess", { Id: id }, function (data) {
+                            if (data.state) {
+                                layer.msg(data.message, { icon: 1 }, function () {
+                                window.location.reload();
+                                });
+                            }
+                            else {
+                                layer.msg(data.message, { icon: 2 });
+                                return false;
+                            }
+                        }, "json")
+                    }, function () {
+                        // 取消
+                    });
+                }
+
+                // 退任务
+                function btn_ReturnTask(id) {
+                    layer.open({
+                        type: 2,
+                        area: ['500px', '450px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        title: '退任务信息',
+                        content: '/Case/ReturnTask?id=' + id
+                    });
+                }
+                
+                // 跟进详情
+                function gjxq(id)
+                {
+                    layer.open({
+                        type: 2,
+                        area: ['50%', '80%'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        title: '任务跟进详情',
+                        content: '/Case/FollowDetails?id=' + id
+                    });
+                }
+
+            </script>
+        </div>
+    </div>
+</body>
+
+
+
+

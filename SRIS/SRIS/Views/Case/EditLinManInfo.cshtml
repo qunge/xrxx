@@ -1,0 +1,175 @@
+﻿@model SRIS.ViewModels.LinkManModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>联系人信息</title>
+    <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+</head>
+<body>
+    <form class="layui-form" action="/Case/EditLinManInfo" method="post">
+        <hr />
+        @Html.HiddenFor(model=>model.RegisterInfoId)
+        @Html.HiddenFor(model=>model.LinkManID)
+        <label class="layui-form-label" style="color:red">@ViewBag.Message</label>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model=>model.LinkManName,new { @class= "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model=>model.LinkManName,new { @class= "layui-input" })
+                    @Html.ValidationMessageFor(model=>model.LinkManName)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-inline">
+                    男 @Html.RadioButtonFor(Model => Model.Sex, 1)
+
+                    女 @Html.RadioButtonFor(Model => Model.Sex, 2)
+
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Birthday, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Birthday, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Birthday)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Relationship, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Relationship, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Relationship)
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Phone, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.TelPhone, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.TelPhone, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.TelPhone)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.QQ, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.QQ, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.QQ)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.WeiXin, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.WeiXin, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.WeiXin)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Email, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Address, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Address, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Address)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.OtherLink, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.OtherLink, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.OtherLink)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.IdCardNo, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.IdCardNo, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.IdCardNo)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Career, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Career, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Career)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Remark, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Remark, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Remark)
+                </div>
+            </div>
+        </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="submit" class="layui-btn"  value="提交"/>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+</form>
+    <script>
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+            //监听提交
+            //form.on('submit(demo1)', function (data) {
+            //    layer.alert(JSON.stringify(data.field), {
+            //        title: '最终的提交信息'
+            //    })
+            //    return false;
+            //});
+           });
+    </script>
+</body>
+</html>

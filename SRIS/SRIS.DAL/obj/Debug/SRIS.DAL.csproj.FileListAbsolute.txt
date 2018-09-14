@@ -1,0 +1,12 @@
+D:\SRIS\SRIS\SRIS\bin\SRIS.DAL.XML
+D:\SRIS\SRIS\SRIS\bin\SRIS.DAL.dll
+D:\SRIS\SRIS\SRIS\bin\SRIS.DAL.pdb
+D:\SRIS\SRIS\SRIS.DAL\obj\Debug\SRIS.DAL.csprojResolveAssemblyReference.cache
+D:\SRIS\SRIS\SRIS.DAL\obj\Debug\SRIS.DAL.dll
+D:\SRIS\SRIS\SRIS.DAL\obj\Debug\SRIS.DAL.pdb
+D:\xrxx\SRIS\SRIS\bin\SRIS.DAL.XML
+D:\xrxx\SRIS\SRIS\bin\SRIS.DAL.dll
+D:\xrxx\SRIS\SRIS\bin\SRIS.DAL.pdb
+D:\xrxx\SRIS\SRIS.DAL\obj\Debug\SRIS.DAL.csprojResolveAssemblyReference.cache
+D:\xrxx\SRIS\SRIS.DAL\obj\Debug\SRIS.DAL.dll
+D:\xrxx\SRIS\SRIS.DAL\obj\Debug\SRIS.DAL.pdb

@@ -1,0 +1,193 @@
+﻿@model SRIS.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "创建案例";
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
+}
+
+<body>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        @Html.ActionLink("首页", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("全部案例", "AllCase", "Case")
+                    </li>
+                    <li class="active">
+                    @Html.ActionLink("创建案例", "CreateCase", "Case")
+                    </li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+            <div class="page-content">
+                <!-- /section:settings.box -->
+
+                <div class="layui-tab layui-tab-card">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">案例信息</li>
+                        @*<li>联系人信息</li>*@
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <!-- 案例信息开始 -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- PAGE CONTENT BEGINS -->
+                                    @using (Html.BeginForm("CreateCase", "Case",FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(model=>model.RegisterInfoId)
+                                        <div class="form-horizontal">
+                                            <hr />
+                                            @Html.ValidationSummary(true)
+                                            <label class = "layui-form-label">@ViewBag.Message</label>
+                                            <div class="layui-form-item">
+                                                <div class="layui-inline">
+                                                    @Html.LabelFor(model => model.CaseCode, htmlAttributes: new { @class = "layui-form-label" })
+                                                    <div class="layui-input-inline">
+                                                        @Html.EditorFor(model => model.CaseCode, new { @class = "layui-input" })
+                                                        @Html.ValidationMessageFor(model => model.CaseCode)
+                                                    </div>
+                                                </div>
+                                                <div class="layui-inline">
+                                                    @Html.LabelFor(model => model.SRTypeId, htmlAttributes: new { @class = "layui-form-label" })
+                                                    <div class="layui-input-inline">
+                                                        @Html.DropDownListFor(model => model.SRTypeId, ViewBag.select as SelectList, "==请选择==")
+                                                        @Html.ValidationMessageFor(model => model.SRTypeId)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="layui-form-item">
+                                                <div class="layui-inline">
+                                                    @Html.LabelFor(model => model.Title, new { @class = "layui-form-label" })
+                                                    <div class="layui-input-inline">
+                                                        @Html.EditorFor(model => model.Title, new { @class = "layui-input" })
+                                                        @Html.ValidationMessageFor(model => model.Title)
+                                                    </div>
+                                                </div>
+                                                <div class="layui-inline">
+                                                    @Html.LabelFor(model => model.BeSeekerName, htmlAttributes: new { @class = "layui-form-label" })
+                                                    <div class="layui-input-inline">
+                                                        @Html.EditorFor(model => model.BeSeekerName, new { @class = "layui-input" })
+                                                        @Html.ValidationMessageFor(model => model.BeSeekerName)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="layui-form-item">
+                                                <div class="layui-inline">
+                                                    @Html.LabelFor(model => model.GetTaskDateTime, new { @class = "layui-form-label" })
+                                                    <div class="layui-input-inline">
+                                                        @Html.EditorFor(model => model.GetTaskDateTime, new { @class = "layui-input" })
+                                                        @Html.ValidationMessageFor(model => model.GetTaskDateTime)
+                                                    </div>
+                                                </div>
+                                                <div class="layui-inline">
+                                                    @Html.LabelFor(model => model.RegisterLink, htmlAttributes: new { @class = "layui-form-label" })
+                                                    <div class="layui-input-inline">
+                                                        @Html.EditorFor(model => model.RegisterLink, new { @class = "layui-input" })
+                                                        @Html.ValidationMessageFor(model => model.RegisterLink)
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="layui-form-item layui-form-text">
+                                                @*<label class="layui-form-label">文本域</label>*@
+                                                @Html.LabelFor(model => model.PostLink, htmlAttributes: new { @class = "layui-form-label" })
+                                                <div class="layui-input-block">
+                                                    @*<textarea placeholder="请输入内容" class="layui-textarea"></textarea>*@
+                                                    @Html.EditorFor(model => model.PostLink, new { @class = "layui-textarea" })
+                                                    @Html.ValidationMessageFor(model => model.PostLink)
+                                                </div>
+                                            </div>
+
+                                            <div class="layui-form-item layui-form-text">
+                                                @*<label class="layui-form-label">文本域</label>*@
+                                                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "layui-form-label" })
+                                                <div class="layui-input-block">
+                                                    @*<textarea placeholder="请输入内容" class="layui-textarea"></textarea>*@
+                                                    @Html.TextAreaFor(model => model.Remarks, new { @class = "layui-textarea" })
+                                                    @Html.ValidationMessageFor(model => model.Remarks)
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="提交" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <!-- PAGE CONTENT ENDS -->
+                                </div><!-- /.col -->
+                            </div>
+                            <!-- 案例信息结束 -->
+                        </div>
+                        <div class="layui-tab-item">
+                            <!-- 联系人信息开始 -->
+                            <!-- 联系人信息结束 -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+               <!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+    <script>
+        layui.use('element', function () {
+            var $ = layui.jquery
+            , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+            //触发事件
+            var active = {
+                tabAdd: function () {
+                    //新增一个Tab项
+                    element.tabAdd('demo', {
+                        title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+                      , content: '内容' + (Math.random() * 1000 | 0)
+                      , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+                    })
+                }
+              , tabDelete: function (othis) {
+                  //删除指定Tab项
+                  element.tabDelete('demo', '44'); //删除：“商品管理”
+
+
+                  othis.addClass('layui-btn-disabled');
+              }
+              , tabChange: function () {
+                  //切换到指定Tab项
+                  element.tabChange('demo', '22'); //切换到：用户管理
+              }
+            };
+
+            $('.site-demo-active').on('click', function () {
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+            });
+
+            //Hash地址的定位
+            var layid = location.hash.replace(/^#test=/, '');
+            element.tabChange('test', layid);
+
+            element.on('tab(test)', function (elem) {
+                location.hash = 'test=' + $(this).attr('lay-id');
+            });
+
+        });
+    </script>
+</body>
+
+
+

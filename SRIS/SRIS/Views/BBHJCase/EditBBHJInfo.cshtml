@@ -1,0 +1,84 @@
+﻿@model SRIS.Model.BBHJCaseModel
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
+}
+<body>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        @Html.ActionLink("首页", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("宝贝回家案例", "Index", "BBHJCase")
+                    </li>
+                    <li>
+                        @Html.ActionLink("编辑信息", "EditBBHJInfo", "BBHJCase")
+                    </li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+            <div style="margin-left: 20px; margin-top:20px">
+                <form class="layui-form" action="/BBHJCase/EditBBHJInfo" method="post">
+                    <hr />
+                    @Html.HiddenFor(model => model.BBHJInfoID)
+                    <label class="layui-form-label" style="color:red">@ViewBag.Message</label>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            @Html.LabelFor(model => model.BBHJCode, new { @class = "layui-form-label" })
+                            <div class="layui-input-inline">
+                                @Html.TextBoxFor(model => model.BBHJCode, new { @class = "layui-input" })
+                                @Html.ValidationMessageFor(model => model.BBHJCode)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            @Html.LabelFor(model => model.Volunteer, new { @class = "layui-form-label" })
+                            <div class="layui-input-inline">
+                                @Html.TextBoxFor(model => model.Volunteer, new { @class = "layui-input" })
+                                @Html.ValidationMessageFor(model => model.Volunteer)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            @Html.LabelFor(model => model.Remarks, new { @class = "layui-form-label" })
+                            <div class="layui-input-inline">
+                                @Html.TextAreaFor(model => model.Remarks, new { @class = "layui-input" })
+                                @Html.ValidationMessageFor(model => model.Remarks)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="submit" class="layui-btn" value="提交" />
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <script>
+                    //Demo
+                    layui.use('form', function () {
+                        var form = layui.form;
+                        //监听提交
+                        //form.on('submit(demo1)', function (data) {
+                        //    layer.alert(JSON.stringify(data.field), {
+                        //        title: '最终的提交信息'
+                        //    })
+                        //    return false;
+                        //});
+                    });
+
+                </script>
+            </div>
+    </div>
+</body>

@@ -1,0 +1,231 @@
+﻿@model SRIS.ViewModels.FollowDetailsInfo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="~/Css/webuploader.css" rel="stylesheet" />
+    <link href="~/Css/index.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/webuploader.min.js"></script>
+    @*<link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">*@
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+
+    <style type="text/css">
+        .layui-form-item {
+            width: 90%;
+            /* margin-top: 10px; */
+            margin: auto;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        $(function () {
+            var uploader = WebUploader.create({
+                // 选完文件后，是否自动上传。
+                auto: false,
+                // 文件接收服务端。
+                server: '/Case/UpLoadProcess',
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#picker',
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false,
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+                /*  fileSizeLimit :10,  //验证文件总大小是否超出限制, 超出则不允许加入队列
+                 fileSingleSizeLimit :10,         //验证单个文件大小是否超出限制, 超出则不允许加入队列。 */
+                duplicate: true  //去重， 根据文件名字、文件大小和最后修改时间来生成hash Key.
+
+            });
+
+
+            // 当文件被加入队列之前触发，此事件的handler返回值为false，则此文件不会被添加进入队列。
+            uploader.on('beforeFileQueued', function (file) {
+                // 限制图片数量
+                img_length = $("#thelist img").length;
+                if (img_length >= 3) {
+                    //layer.msg("图片最多上传6张");
+                    alert("最多上传3张图片");
+                    return false;
+                }
+
+            });
+
+            // 当有文件添加进来的时候
+            uploader.on('fileQueued', function (file) {
+                var $li = $(
+                            '<div id="' + file.id + '" class="file-item thumbnail col-sm-3" style="width:20%;margin-left:15px;float:left">' +
+                                '<img>' +
+                                '<div class="info">' + file.name + '</div>' +
+                                '<span style="margin-left: 6%;cursor:pointer;" class="layui-btn layui-btn-danger layui-btn-xs" onclick="deleteFile(this)">删除</span>' +
+                            '</div>'
+                            ),
+                        $img = $li.find('img');
+                // $list为容器jQuery实例
+                $("#thelist").append($li);
+                // 创建缩略图
+                // 如果为非图片文件，可以不用调用此方法。
+                // thumbnailWidth x thumbnailHeight 为 100 x 100
+                uploader.makeThumb(file, function (error, src) {
+                    if (error) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+                    $img.attr('src', src);
+                }, 150, 150);
+
+            });
+
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader.on('uploadSuccess', function (file,response) {
+                debugger
+                // $("#txt_ImageUrl").append(response.filePath);
+                var val = $("#txt_ImageUrl").val();
+                if (val == "") {
+                    $("#txt_ImageUrl").val(response.filePath);
+                }
+                else {
+                    $("#txt_ImageUrl").val(val + "," + response.filePath);
+                }
+                $('#' + file.id).addClass('upload-state-done');
+                var $li = $('#' + file.id),
+                   $done = $li.find('div.upload-state-done');
+                // 避免重复创建
+                if (!$done.length) {
+                    $done = $('<div class=""></div>').appendTo($li);
+                }
+                $done.html('<font color="blue">上传成功</font>');
+            });
+
+            // 文件上传失败，显示上传出错。
+            uploader.on('uploadError', function (file) {
+                var $li = $('#' + file.id),
+                    $error = $li.find('div.error');
+                // 避免重复创建
+                if (!$error.length) {
+                    $error = $('<div class="error"></div>').appendTo($li);
+                }
+                $error.html('<font color="red">上传失败</font>');
+            });
+
+            $("#ctlBtn").click(function () {
+                uploader.upload();
+            })
+
+            // 提交
+            $("#btn_submit").click(function () {
+                debugger
+                var imageUrl = $("#txt_ImageUrl").val();
+                var id = getQueryVariable("id");
+                if (id == "")
+                {
+                    layer.msg("没有获取到案例ID");
+                    return false;
+                }
+                var gjxx = $("#txt_gjxx").val();
+                if (gjxx == "")
+                {
+                    layer.msg("跟进信息不能为空");
+                    return false;
+                }
+                $.post("/Case/CreateFollow", { imageUrl: imageUrl, gjxx: gjxx, id: id }, function (respone) {
+                    if (respone.status) {
+                        layer.alert(respone.message, function () {
+                            parent.layer.closeAll();
+                            parent.window.location.reload();
+                        });
+                    }
+                    else {
+                        layer.alert(respone.message);
+                    }
+
+                }, "json")
+            });
+
+        })
+
+        function deleteFile(obj) {
+            $(obj).parent().remove();
+        }
+
+        // 获取页面传递的参数
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+
+       
+
+    </script>
+</head>
+<body>
+    @*<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>方框风格的表单集合</legend>
+    </fieldset>*@
+    <form class="layui-form layui-form-pane" action="">
+     
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">跟进信息</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入跟进信息" id="txt_gjxx" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        @*上传图片*@
+        <div class="row">
+            <p>最多上传三张图片</p>
+            <!--用来存放文件信息-->
+            <div id="thelist" class="uploader-list col-sm-10" style="width:960px;"></div>
+            <div style="clear:both;"></div>
+            <div class="btns col-sm-2" style="border-top: 1px solid #dadada; margin-top: 20px; padding-top: 20px;background-color: #fafafa;height: 40px;">
+                <input type="button" id="ctlBtn" class="btn default-btn" value="上传图片"> 
+                <div id="picker" class="selectFile">选择文件</div>
+            </div>
+        </div>
+        <input type="hidden" id="txt_ImageUrl"/>
+        <div class="layui-form-item">
+            <input type="button" class="layui-btn" lay-submit="" lay-filter="demo2" id="btn_submit" value="提交">
+        </div>
+    </form>
+
+    @*<script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>*@
+    <script src="~/Content/layui/layui.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>
+        layui.use(['form', 'layedit', 'laydate'], function () {
+            var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+            //监听提交
+            form.on('submit(demo1)', function (data) {
+                layer.alert(JSON.stringify(data.field), {
+                    title: '最终的提交信息'
+                })
+                return false;
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

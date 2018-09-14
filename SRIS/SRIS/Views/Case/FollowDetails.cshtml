@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "FollowDetails";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>任务跟进详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="~/scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/Css/zoom.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">*@
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>
+        <a onclick="gjxq()" class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">新增跟进</a>
+        </legend>
+    </fieldset>
+    <ul class="layui-timeline">
+       <li><img src="~/Image/index-bj.jpg" /></li>
+    </ul>
+    
+   
+    @*<script src="~/Content/layui/layui.js" charset="utf-8"></script>*@
+    <script src="~/Content/assets/js/bootstrap.js"></script>
+    <script src="~/scripts/zoom.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script type="text/javascript">
+        $(function () {
+            debugger
+            var id = getQueryVariable("id");
+            $.post("/Case/GetFollowDetails", { id: id }, function (data) {
+                if (data.status) {
+                    var str=""
+                    $.each(data.data, function () {
+                        var year = this.CreateDataTime.substring(0,10)
+                        str += "<li class=\"layui-timeline-item\">";
+                        str += "<i class=\"layui-icon layui-timeline-axis\"></i>";
+                        str += "<div class=\"layui-timeline-content layui-text\">";
+                        str += "<h3 class=\"layui-timeline-title\">" + year + "</h3>";
+                        str += "<p style=\"padding-right: 50px;\">";
+                        str += this.MesText;
+                        str += "</p>";
+                        debugger
+                        if (this.ImageUrl != "") {
+                            var iu = this.ImageUrl.split(',');
+                            $.each(iu, function () {
+                                str += "<span style=\"padding-right: 50px;\">";
+                                str += "<img src=\"" + this + "\" data-action=\"zoom\" style=\"width:20%\" />";
+                                str += "</span>";
+                            })
+                        }
+                        str += "</div>";
+                        str += "<p style=\"padding-left: 25px; padding-top: 10px;\">";
+                        str += " <a onclick=\"btn_Edit('" + this.Id + "')\" class=\"layui-btn layui-btn-xs\" lay-event=\"edit\">编辑</a>";
+                        str += " <a onclick=\"btn_Del('" + this.Id + "')\" class=\"layui-btn layui-btn-danger layui-btn-xs\">删除</a>";
+                        str += "</p>";
+                        str += "</li>";
+                       
+
+                    });
+                    str += "<li class=\"layui-timeline-item\">";
+                    str += "<i class=\"layui-icon layui-timeline-axis\"></i>";
+                    str += "</li>";
+                    $(".layui-timeline").html(str);
+                }
+                else {
+                    layer.alert("没有查询到信息", function () {
+                        layer.close(this);
+                    });
+                }
+            },"json")
+        })
+
+        // 跟进详情
+        function gjxq() {
+            var id = getQueryVariable("id");
+            layer.open({
+                type: 2,
+                area: ['80%', '90%'],
+                fixed: false, //不固定
+                maxmin: true,
+                title: '任务跟进详情',
+                content: '/Case/AddFollowDetails?id=' + id
+            });
+        }
+
+        // 编辑跟进信息
+        function btn_Edit(id)
+        {
+            layer.open({
+                type: 2,
+                area: ['80%', '90%'],
+                fixed: true, //不固定
+                maxmin: true,
+                title: '编辑跟进详情',
+                content: '/Case/UpdateFollowDetails?id=' + id
+            });
+            //$.post("/Case/UpdateFollowDetails", { id: id }, function (data) {
+            //    if (data.status) {
+            //        layer.msg(data.message);
+            //        window.location.reload();
+            //    }
+            //    else {
+            //        layer.msg(data.message);
+            //    }
+            //}, "json")
+        }
+
+        // 删除跟进信息
+        function btn_Del(id)
+        {
+            $.post("/Case/DelFollowDetails", { id: id }, function (data) {
+                if (data.status) {
+                    layer.msg(data.message);
+                    window.location.reload();
+                }
+                else {
+                    layer.msg(data.message);
+                }
+            }, "json")
+        }
+
+        // 获取页面传递的参数
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+    </script>
+
+
+</body>
+</html>
+

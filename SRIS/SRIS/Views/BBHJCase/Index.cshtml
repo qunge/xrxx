@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "宝贝回家案例";
+    Layout = "~/Views/Shared/_BlankPage.cshtml";
+}
+<body>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                </script>
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        @Html.ActionLink("首页", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("宝贝回家案例", "Index", "BBHJCase")
+                    </li>
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div style="margin-left: 20px; margin-top:20px">
+                <div style="margin-left: 20px; margin-top:20px">
+                    <table class="layui-hide" id="test"></table>
+                </div>
+            </div>
+            <script type="text/html" id="djLink">
+                <a href="{{d.RegisterLink}}" class="layui-table-link" target="_blank">{{ d.RegisterLink }}</a>
+            </script>
+            <script type="text/html" id="barDemo">
+                <a onclick="LinkManInfo('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">联系人信息</a>
+                <a onclick="btn_Edit('{{d.BBHJInfoID}}')" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            </script>
+            <script>
+                layui.use('table', function () {
+                    var table = layui.table;
+
+                    var tableIns = table.render({
+                        elem: '#test'
+                      , url: '/BBHJCase/GetBBHJCase'
+                        //, cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                      , cols: [[
+                        { field: 'CaseCode', title: '案例编号', width: '120' }
+                        , { field: 'SRTypeName', title: '寻亲类别', width: '100' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                        , { field: 'Title', title: '标题', width: '150' }
+                        , { field: 'BeSeekerName', title: '被寻人姓名', width: '100' }
+                        , { field: 'GetTaskDate', title: '领任务时间', width: '130' }
+                        , { field: 'RegisterLink', templet: '#djLink', title: '登记信息', align: 'center', width: '100' } //单元格内容水平居中
+                        , { field: 'GuideTime', title: '引导宝贝回家时间', align: 'left', width: '150' }
+                        , { field: 'BBHJCode', title: '宝贝回家案例编号', align: 'left', width: '150' } //单元格内容水平居中
+                        , { field: 'Volunteer', title: '宝贝回家跟进志愿者', align: 'left', width: '180' }
+                        , { field: 'Remarks', title: '备注', align: 'left', width: '150' }
+                        , { field: 'right', title: '操作', align: 'left', toolbar: '#barDemo', width: '150' }
+                      ]]
+                      , page: true
+                      , limits: [10, 20, 30, 50, 80, 100]
+                    });
+
+                });
+
+                // 联系人信息
+                function LinkManInfo(id) {
+                    layer.open({
+                        type: 2,
+                        area: ['500px', '450px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        title: '联系人信息',
+                        content: '/Case/EditLinManInfo?id=' + id
+                    });
+                }
+
+                function btn_Edit(id) {
+                    //layer.open({
+                    //    type: 2,
+                    //    area: ['470px', '300px'],
+                    //    fixed: false, //不固定
+                    //    maxmin: true,
+                    //    title: '联系人信息',
+                    //    content: '/BBHJCase/EditBBHJInfo?id=' + id
+                    //});
+                    window.location.href = "/BBHJCase/EditBBHJInfo?id=" + id;
+                };
+
+            </script>
+        </div>
+    </div>
+</body>
+
+
+
+

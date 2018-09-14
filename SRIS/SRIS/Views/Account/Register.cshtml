@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+<body>
+    <div id="signup-box" class="signup-box widget-box no-border">
+        <div class="widget-body">
+            <div class="widget-main">
+                <h4 class="header green lighter bigger">
+                    <i class="ace-icon fa fa-users blue"></i>
+                    新用户注册
+                </h4>
+                <div class="space-6"></div>
+                <p> 请输入您的注册信息: </p>
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                    <fieldset>
+                        <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" id="UserName" class="form-control" placeholder="用户名" />
+                                <i class="ace-icon fa fa-user"></i>
+                            </span>
+                        </label>
+                        <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                                <input type="password" id="PassWord" class="form-control" placeholder="密码" />
+                                <i class="ace-icon fa fa-lock"></i>
+                            </span>
+                        </label>
+                        <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                                <input type="password" id="RedPwd" class="form-control" placeholder="确认密码" />
+                                <i class="ace-icon fa fa-retweet"></i>
+                            </span>
+                        </label>
+                        <div class="space-24"></div>
+                        <div class="clearfix">
+                            <button type="reset" class="width-30 pull-left btn btn-sm">
+                                <i class="ace-icon fa fa-refresh"></i>
+                                <span class="bigger-110">清空</span>
+                            </button>
+                            <button type="button" class="width-65 pull-right btn btn-sm btn-success" id="btn_Register">
+                                <span class="bigger-110">注册</span>
+                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                            </button>
+                        </div>
+                    </fieldset>
+                }
+            </div>
+            <div class="toolbar center">
+                <a href="/Account/Login" data-target="#login-box" class="back-to-login-link">
+                    <i class="ace-icon fa fa-arrow-left"></i>
+                    返回登录
+                </a>
+            </div>
+        </div><!-- /.widget-body -->
+    </div><!-- /.signup-box -->
+</body>
+<script>
+    $(function () {
+        $("#btn_Register").click(function () {
+            // 验证信息
+            var userName=$("#UserName").val();
+            var checkUserName = /^[A-Za-z0-9\u4e00-\u9fa5]+$/;
+            if (!checkUserName.test(userName))
+            {
+                layer.alert("用户名必须是汉字、字母或数字", { icon: 2 });
+                return false;
+            }
+
+            var pwd = $("#PassWord").val();
+            var checkPwd = /^[a-zA-Z]\w{5,17}$/;
+            if (!checkPwd.test(pwd))
+            {
+                layer.alert("密码必须以字母开头，长度在6~18之间，只能包含字符、数字和下划线", { icon: 2 });
+                return false;
+            }
+
+            var redPwd = $("#RedPwd").val();
+            if (pwd != redPwd)
+            {
+                layer.alert("两次输入的密码不一致", { icon: 2 });
+                return false;
+            }
+            $.post("/Account/Register", { parame: JSON.stringify({ UserName: userName, PassWord: pwd }) }, function (result) {
+                if (result.state) {
+                    layer.alert("注册成功", { icon: 1 }, function () {
+                        window.location.href = "/Account/Login";
+                    });
+                }
+                else {
+                    layer.alert(result.message, { icon: 2 });
+                    return false;
+                }
+            });
+        });
+    })
+</script>
