@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SRIS.Framework;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
-namespace SRIS.Model
+namespace SRIS.ViewModels
 {
-    /// <summary>
-    /// 宝贝回家案例实体类
-    /// </summary>
-    public class BBHJCaseModel
+    public class BBHJCaseInfo
+    {
+        public int code { get; set; }
+        public string msg { get; set; }
+        public int count { get; set; }
+        public List<BBHJCaseViewInfo> data { get; set; }
+    }
+    public class BBHJCaseViewInfo
     {
         /// <summary>
         /// 宝贝回家案例ID
@@ -21,11 +22,12 @@ namespace SRIS.Model
         /// <summary>
         /// 登记案例ID
         /// </summary>
+        [Required]
         public string RegisterInfoId { get; set; }
         /// <summary>
         /// 等着我案例编号
         /// </summary>
-       
+
         public string CaseCode { get; set; }
 
         /// <summary>
@@ -47,11 +49,11 @@ namespace SRIS.Model
         /// 被寻人姓名
         /// </summary>
         public string BeSeekerName { get; set; }
-        
+
         /// <summary>
         /// 领任务时间
         /// </summary>
-        public DateTime GetTaskDate
+        public string GetTaskDate
         {
             get;
             set;
@@ -66,7 +68,7 @@ namespace SRIS.Model
         /// <summary>
         /// 引导到宝贝回家时间
         /// </summary>
-        public DateTime GuideTime
+        public string GuideTime
         {
             get;
             set;
@@ -83,7 +85,7 @@ namespace SRIS.Model
         /// 跟进志愿者
         /// </summary>
         [Required]
-        [Display(Name="跟进志愿者：")]
+        [Display(Name = "宝贝回家跟进志愿者：")]
         public string Volunteer { get; set; }
 
         /// <summary>

@@ -1,7 +1,9 @@
-﻿@{
-    ViewBag.Title = "宝贝回家案例";
+﻿
+@{
+    ViewBag.Title = "导宝贝回家案例";
     Layout = "~/Views/Shared/_BlankPage.cshtml";
 }
+
 <body>
     <div class="main-content">
         <div class="main-content-inner">
@@ -15,49 +17,115 @@
                         @Html.ActionLink("首页", "Index", "Home")
                     </li>
                     <li>
-                        @Html.ActionLink("宝贝回家案例", "Index", "BBHJCase")
+                        @Html.ActionLink("引导宝贝回家案例", "Index", "BBHJCase")
                     </li>
                 </ul><!-- /.breadcrumb -->
             </div>
 
             <div style="margin-left: 20px; margin-top:20px">
-                <div style="margin-left: 20px; margin-top:20px">
-                    <table class="layui-hide" id="test"></table>
+
+                <div class="demoTable">
+                    <form class="layui-form layui-form-pane">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"> 案例编号：</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" id="txt_CaseCode" autocomplete="off">
+                            </div>
+
+                            <label class="layui-form-label"> 寻亲类别：</label>
+                            <div class="layui-input-inline">
+                                <select id="txt_sl_SRTypeId">
+                                    <option value="" selected="selected">==请选择==</option>
+                                    <option value="712B6DF7-0964-40A1-A877-37215D6B48AC">家寻亲人</option>
+                                    <option value="74C2B3D5-7432-49DC-AC5E-E9E0B39506AC">家寻送养</option>
+                                    <option value="D283C991-2B73-4F31-B439-6BFBB5AB94E6">亲人寻家</option>
+                                    <option value="D7D39E3D-73B8-4811-AE41-58156450E9D0">战友情深</option>
+                                    <option value="A20836C8-AE2B-4F0D-BECB-AF369DCBE694">感恩寻人</option>
+                                    <option value="5F52FFA4-9951-4A68-990F-C02886E4B973">寻找老友</option>
+                                    <option value="16982AC2-9966-4E45-A360-B253C4381E64">其他寻人</option>
+                                    <option value="0D2296D4-2047-450A-9E00-2B73CE91F7C0">台海寻亲</option>
+                                </select>
+                            </div>
+                            <label class="layui-form-label">被寻人姓名：</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" id="txt_BeSeekerName" autocomplete="off">
+                            </div>
+                            <label class="layui-form-label"> 领任务时间：</label>
+                            <div class="layui-input-inline">
+                                <input type="date" class="layui-input" id="txt_getTaskDate" autocomplete="off">
+                            </div>
+                        </div>
+                    </form>
+                    <button class="layui-btn" data-type="reload">搜索</button>
                 </div>
+
+
+                <table class="layui-hide" id="test"></table>
             </div>
+
+            <script type="text/html" id="barDemo">
+                <a onclick="gjxq('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-sm layui-btn-normal" lay-event="detail">跟进详情</a>
+                <a onclick="LinkManInfo('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-sm layui-btn-xs" lay-event="detail">联系人信息</a>
+            </script>
+
             <script type="text/html" id="djLink">
                 <a href="{{d.RegisterLink}}" class="layui-table-link" target="_blank">{{ d.RegisterLink }}</a>
             </script>
-            <script type="text/html" id="barDemo">
-                <a onclick="LinkManInfo('{{d.RegisterInfoId}}')" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">联系人信息</a>
-                <a onclick="btn_Edit('{{d.BBHJInfoID}}')" class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-            </script>
+
             <script>
                 layui.use('table', function () {
                     var table = layui.table;
 
                     var tableIns = table.render({
                         elem: '#test'
-                      , url: '/BBHJCase/GetBBHJCase'
+                      , url: '/BBHJCase/GetBBHJCaseList'
                         //, cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                       , cols: [[
                         { field: 'CaseCode', title: '案例编号', width: '120' }
                         , { field: 'SRTypeName', title: '寻亲类别', width: '100' } //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
                         , { field: 'Title', title: '标题', width: '150' }
                         , { field: 'BeSeekerName', title: '被寻人姓名', width: '100' }
-                        , { field: 'GetTaskDate', title: '领任务时间', width: '130' }
+                        , { field: 'GetTaskDate', title: '领任务时间', width: '100' }
                         , { field: 'RegisterLink', templet: '#djLink', title: '登记信息', align: 'center', width: '100' } //单元格内容水平居中
-                        , { field: 'GuideTime', title: '引导宝贝回家时间', align: 'left', width: '150' }
-                        , { field: 'BBHJCode', title: '宝贝回家案例编号', align: 'left', width: '150' } //单元格内容水平居中
-                        , { field: 'Volunteer', title: '宝贝回家跟进志愿者', align: 'left', width: '180' }
+                        //, { field: 'GuideTime', title: '引导时间', width: '100' } //单元格内容水平居中
+                        , { field: 'BBHJCode', title: '宝贝回家编号', width: '100' }
+                        , { field: 'Volunteer', title: '宝贝回家跟进志愿者', width: '150' }
                         , { field: 'Remarks', title: '备注', align: 'left', width: '150' }
-                        , { field: 'right', title: '操作', align: 'left', toolbar: '#barDemo', width: '150' }
+                        , { field: 'right', title: '操作', align: 'left', toolbar: '#barDemo', width: '550' }
                       ]]
+                      , id: 'testReload'
                       , page: true
                       , limits: [10, 20, 30, 50, 80, 100]
                     });
 
+                    // 搜索
+                    var $ = layui.$, active = {
+                        reload: function () {
+                            //执行重载
+                            table.reload('testReload', {
+                                page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                              , where: {
+                                  whereStr: JSON.stringify(
+                                      {
+                                          caseCode: $("#txt_CaseCode").val(),
+                                          srTypeId: $("#txt_sl_SRTypeId").val(),
+                                          beSeekerName: $("#txt_BeSeekerName").val(),
+                                          getTaskDate: $("#txt_getTaskDate").val()
+                                      })
+                              }
+                            });
+                        }
+                    };
+
+                    $('.demoTable .layui-btn').on('click', function () {
+                        var type = $(this).data('type');
+                        active[type] ? active[type].call(this) : '';
+                    });
                 });
+
+                
 
                 // 联系人信息
                 function LinkManInfo(id) {
@@ -71,17 +139,18 @@
                     });
                 }
 
-                function btn_Edit(id) {
-                    //layer.open({
-                    //    type: 2,
-                    //    area: ['470px', '300px'],
-                    //    fixed: false, //不固定
-                    //    maxmin: true,
-                    //    title: '联系人信息',
-                    //    content: '/BBHJCase/EditBBHJInfo?id=' + id
-                    //});
-                    window.location.href = "/BBHJCase/EditBBHJInfo?id=" + id;
-                };
+
+                // 跟进详情
+                function gjxq(id) {
+                    layer.open({
+                        type: 2,
+                        area: ['50%', '80%'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        title: '任务跟进详情',
+                        content: '/Case/FollowDetails?id=' + id
+                    });
+                }
 
             </script>
         </div>

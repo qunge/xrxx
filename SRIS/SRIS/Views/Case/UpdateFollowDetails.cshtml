@@ -99,7 +99,7 @@
                     $("#txt_ImageUrl").val(response.filePath);
                 }
                 else {
-                    $("#txt_ImageUrl").val(response.filePath+","+val );
+                    $("#txt_ImageUrl").val(response.filePath + "," + val);
                 }
                 $('#' + file.id).addClass('upload-state-done');
                 var $li = $('#' + file.id),
@@ -131,14 +131,12 @@
                 debugger
                 var imageUrl = $("#txt_ImageUrl").val();
                 var id = $("#hid_Id").val();
-                if (id == "")
-                {
+                if (id == "") {
                     layer.msg("没有获取到跟进信息ID");
                     return false;
                 }
                 var gjxx = $("#txt_gjxx").val();
-                if (gjxx == "")
-                {
+                if (gjxx == "") {
                     layer.msg("跟进信息不能为空");
                     return false;
                 }
@@ -157,19 +155,17 @@
 
         })
 
-        function deleteFile(obj,fileName) {
+        function deleteFile(obj, fileName) {
             debugger
             var imageUrl = $("#txt_ImageUrl").val();
-            var array=imageUrl.split(',');
+            var array = imageUrl.split(',');
             var index = -1;
-            for(var i=0;i<array.length;i++)
-            {
-                if(array[i]==fileName)
-                {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] == fileName) {
                     index = i;
                 }
             }
-            array.splice(index,1);
+            array.splice(index, 1);
             $("#txt_ImageUrl").val(array.toString());
             $(obj).parent().remove();
         }
@@ -187,7 +183,7 @@
 
 
 
-   </script>
+    </script>
 </head>
 <body>
     <form class="layui-form layui-form-pane" action="">
@@ -204,16 +200,16 @@
             <!--用来存放文件信息-->
             <div id="thelist" class="uploader-list col-sm-10" style="width:960px;">
                 @{ string[] imageArry = Model.ImageUrl.Split(',');
-                        for (int i=0;i<imageArry.Length;i++)
-                        {
-                            int lastIndex = imageArry[i].LastIndexOf('/');
-                            string fileName = imageArry[i].Substring(lastIndex+1);
-                        <div id="WU_FILE_@i" class="file-item thumbnail col-sm-3" style="width:20%;margin-left:15px;float:left">
-                            <img src="@imageArry[i]" style="width:100%" />
-                            <div class="info"></div>
-                            <span style="margin-left: 6%;cursor:pointer;" class="layui-btn layui-btn-danger layui-btn-xs" onclick="deleteFile(this,'@imageArry[i]')">删除</span>                        
-                        </div>
-                    }
+                 for (int i = 0; i < imageArry.Length; i++)
+                 {
+                     int lastIndex = imageArry[i].LastIndexOf('/');
+                     string fileName = imageArry[i].Substring(lastIndex + 1);
+                    <div id="WU_FILE_@i" class="file-item thumbnail col-sm-3" style="width:20%;margin-left:15px;float:left">
+                        <img src="@imageArry[i]" style="width:100%" />
+                        <div class="info"></div>
+                        <span style="margin-left: 6%;cursor:pointer;" class="layui-btn layui-btn-danger layui-btn-xs" onclick="deleteFile(this,'@imageArry[i]')">删除</span>
+                    </div>
+                 }
                 }
             </div>
             <div style="clear:both;"></div>
@@ -222,7 +218,7 @@
                 <div id="picker" class="selectFile">选择文件</div>
             </div>
         </div>
-        <input type="text" id="txt_ImageUrl" value="@Model.ImageUrl" />
+        <input type="hidden" id="txt_ImageUrl" value="@Model.ImageUrl" />
         <input type="hidden" id="hid_Id" value="@Model.Id" />
         <div class="layui-form-item">
             <input type="button" class="layui-btn" lay-submit="" lay-filter="demo2" id="btn_submit" value="提交">
@@ -232,20 +228,20 @@
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
         layui.use(['form', 'layedit', 'laydate'], function () {
-                        var form = layui.form
-                        , layer = layui.layer
-                        , layedit = layui.layedit
-                        , laydate = layui.laydate;
+            var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
 
-                        //监听提交
-                        form.on('submit(demo1)', function (data) {
-                            layer.alert(JSON.stringify(data.field), {
-                                title: '最终的提交信息'
-                            })
+            //监听提交
+            form.on('submit(demo1)', function (data) {
+                layer.alert(JSON.stringify(data.field), {
+                    title: '最终的提交信息'
+                })
                 return false;
-                        });
+            });
 
-                    });
+        });
 
     </script>
 

@@ -74,7 +74,7 @@
                 }
                 else {
                     layer.alert("没有查询到信息", function () {
-                        layer.close(this);
+                        parent.layer.closeAll();
                     });
                 }
             },"json")

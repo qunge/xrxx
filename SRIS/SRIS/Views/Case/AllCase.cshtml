@@ -184,17 +184,14 @@
                         btn: ['确定', '取消'] //按钮
                     }, function () {
                         // 确定引导
-                        $.post("/Case/ydbbhj", { id: id }, function (data) {
-                            if (data.state) {
-                                layer.msg(data.message, { icon: 1 }, function () {
-                                window.location.reload();
-                                });
-                            }
-                            else {
-                                layer.msg(data.message, { icon: 2 });
-                                return false;
-                            }
-                        })
+                        layer.open({
+                            type: 2,
+                            area: ['500px', '450px'],
+                            fixed: false, //不固定
+                            maxmin: true,
+                            title: '引导到宝贝回家',
+                            content: '/BBHJCase/AddBBHJ?id=' + id
+                        });
                     }, function () {
                         // 取消
                     });

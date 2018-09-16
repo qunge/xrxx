@@ -14,20 +14,13 @@ namespace SRIS.SPI
         /// 获取所有的宝贝回家案例
         /// </summary>
         /// <returns></returns>
-        List<BBHJCaseModel> GetAllBBHJCase();
+        List<BBHJCaseModel> GetAllBBHJCase(string userid, int page, int limit, Dictionary<string, string> whereDic, out int pageCount);
 
         /// <summary>
-        /// 根据案例编号ID修改宝贝案例信息
+        /// 创建宝贝回家案例
         /// </summary>
-        /// <param name="model">宝贝案例信息实体</param>
+        /// <param name="model">宝贝回家案例实体类</param>
         /// <returns></returns>
-        bool UpdateBBHJInfoById(BBHJCaseModel model);
-
-        /// <summary>
-        /// 获取宝贝回家案例信息
-        /// </summary>
-        /// <param name="Id">宝贝回家案例ID</param>
-        /// <returns></returns>
-        BBHJInfo GetBBHJInfoByID(string Id);
+        bool CreateBBHJCase(BBHJInfo model);
     }
 }

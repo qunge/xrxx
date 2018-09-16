@@ -1,0 +1,79 @@
+﻿@model SRIS.ViewModels.BBHJCaseViewInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+    <title>添加宝贝回家信息</title>
+    <style type="text/css">
+        .field-validation-error {
+            color:red;
+        }
+    </style>
+</head>
+<body style="margin-top:40px">
+    <form class="layui-form" action="/BBHJCase/AddBBHJ" method="post">
+        @Html.AntiForgeryToken()
+        @Html.Hidden(model => model.RegisterInfoId);
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.BBHJCode, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.BBHJCode, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.BBHJCode)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Volunteer, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextBoxFor(model => model.Volunteer, new { @class = "layui-input" })
+                    @Html.ValidationMessageFor(model => model.Volunteer)
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                @Html.LabelFor(model => model.Remarks, new { @class = "layui-form-label" })
+                <div class="layui-input-inline">
+                    @Html.TextAreaFor(model => model.Remarks, new { @class = "layui-textarea" })
+                    @Html.ValidationMessageFor(model => model.Remarks)
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="submit" class="layui-btn" value="提交" />
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+        </from>
+
+        <script>
+            //Demo
+            layui.use('form', function () {
+                var form = layui.form;
+                //监听提交
+                //form.on('submit(demo1)', function (data) {
+                //    layer.alert(JSON.stringify(data.field), {
+                //        title: '最终的提交信息'
+                //    })
+                //    return false;
+                //});
+            });
+        </script>
+
+
+</body>
+</html>

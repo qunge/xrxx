@@ -371,31 +371,31 @@ namespace SRIS.Controllers
             return Json(obj);
         }
 
-        /// <summary>
-        /// 设置为宝贝回家案例
-        /// </summary>
-        /// <param name="id">案例编号</param>
-        /// <returns></returns>
-        public JsonResult ydbbhj(string id)
-        {
-            var obj = new { state = false, message = "" };
-            if (!string.IsNullOrEmpty(id))
-            {
-                if (IRegisterInfo.Bbhj(id))
-                {
-                    obj = new { state = true, message = "设置成功" };
-                }
-                else
-                {
-                    obj = new { state = false, message = "设置失败" };
-                }
-            }
-            else
-            {
-                obj = new { state = false, message = "案例编号不能为空" };
-            }
-            return Json(obj);
-        }
+        ///// <summary>
+        ///// 设置为宝贝回家案例
+        ///// </summary>
+        ///// <param name="id">案例编号</param>
+        ///// <returns></returns>
+        //public JsonResult ydbbhj(string id)
+        //{
+        //    var obj = new { state = false, message = "" };
+        //    if (!string.IsNullOrEmpty(id))
+        //    {
+        //        if (IRegisterInfo.Bbhj(id))
+        //        {
+        //            obj = new { state = true, message = "设置成功" };
+        //        }
+        //        else
+        //        {
+        //            obj = new { state = false, message = "设置失败" };
+        //        }
+        //    }
+        //    else
+        //    {
+        //        obj = new { state = false, message = "案例编号不能为空" };
+        //    }
+        //    return Json(obj);
+        //}
 
         /// <summary>
         /// 设置为成功案例
