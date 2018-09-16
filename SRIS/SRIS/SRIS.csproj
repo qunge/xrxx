@@ -604,6 +604,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BBHJCaseInfo.cs" />
     <Compile Include="ViewModels\FollowDetailsInfo.cs" />
     <Compile Include="ViewModels\LinkMan.cs" />
     <Compile Include="ViewModels\RegisterCaseInfo.cs" />
@@ -832,13 +833,13 @@
     <Content Include="Views\Case\EditCase.cshtml" />
     <Content Include="Views\Case\EditLinManInfo.cshtml" />
     <Content Include="Views\Case\ReturnTask.cshtml" />
-    <Content Include="Views\BBHJCase\Index.cshtml" />
-    <Content Include="Views\BBHJCase\EditBBHJInfo.cshtml" />
     <Content Include="Views\SuccessCase\Index.cshtml" />
     <Content Include="Views\Case\FollowDetails.cshtml" />
     <Content Include="scripts\js\jquery-1.10.2.min.map" />
     <Content Include="Views\Case\AddFollowDetails.cshtml" />
     <Content Include="Views\Case\UpdateFollowDetails.cshtml" />
+    <Content Include="Views\BBHJCase\Index.cshtml" />
+    <Content Include="Views\BBHJCase\AddBBHJ.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -860,11 +861,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>48787</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/SRIS</IISUrl>
+          <IISUrl>http://localhost:48787/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
