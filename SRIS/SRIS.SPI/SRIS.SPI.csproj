@@ -51,6 +51,7 @@
     <Compile Include="IBBHJInfo.cs" />
     <Compile Include="IFollowDetails.cs" />
     <Compile Include="IRegisterInfo.cs" />
+    <Compile Include="IReturnCase.cs" />
     <Compile Include="ISuccessCase.cs" />
     <Compile Include="IUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

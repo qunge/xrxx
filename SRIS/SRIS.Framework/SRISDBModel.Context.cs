@@ -28,8 +28,8 @@ namespace SRIS.Framework
         public virtual DbSet<BBHJInfo> BBHJInfo { get; set; }
         public virtual DbSet<FollowDetails> FollowDetails { get; set; }
         public virtual DbSet<LinkMan> LinkMan { get; set; }
-        public virtual DbSet<RegisterInfo> RegisterInfo { get; set; }
         public virtual DbSet<SRType> SRType { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<RegisterInfo> RegisterInfo { get; set; }
     }
 }

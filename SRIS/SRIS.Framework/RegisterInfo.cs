@@ -25,7 +25,7 @@ namespace SRIS.Framework
         public int IsReturnTask { get; set; }
         public Nullable<System.DateTime> ReturnTaskDateTime { get; set; }
         public string ReturnReason { get; set; }
-        public string IsBBHJ { get; set; }
+        public Nullable<int> IsBBHJ { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreateDateTime { get; set; }
         public string SRTypeID { get; set; }

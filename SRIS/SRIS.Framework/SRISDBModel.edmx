@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SRISDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SRISDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BBHJInfo">
           <Key>
             <PropertyRef Name="BBHJInfoID" />
@@ -65,7 +65,7 @@
           <Property Name="IsReturnTask" Type="int" Nullable="false" />
           <Property Name="ReturnTaskDateTime" Type="datetime" />
           <Property Name="ReturnReason" Type="nvarchar" MaxLength="50" />
-          <Property Name="IsBBHJ" Type="nvarchar(max)" />
+          <Property Name="IsBBHJ" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
           <Property Name="SRTypeID" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -98,8 +98,7 @@
           <EntitySet Name="SRType" EntityType="Self.SRType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SRISDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -148,29 +147,6 @@
           <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
-        <EntityType Name="RegisterInfo">
-          <Key>
-            <PropertyRef Name="RegisterInfoID" />
-          </Key>
-          <Property Name="RegisterInfoID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CaseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BeSeekerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GetTaskDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="RegisterLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PostLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DNAState" Type="Int32" />
-          <Property Name="IsReturnTask" Type="Int32" Nullable="false" />
-          <Property Name="ReturnTaskDateTime" Type="DateTime" Precision="3" />
-          <Property Name="ReturnReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsBBHJ" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SRTypeID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserInfoID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsDelete" Type="Int32" Nullable="false" />
-          <Property Name="IsSuccess" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="SRType">
           <Key>
             <PropertyRef Name="SRTypeID" />
@@ -192,10 +168,33 @@
           <EntitySet Name="BBHJInfo" EntityType="Self.BBHJInfo" />
           <EntitySet Name="FollowDetails" EntityType="Self.FollowDetails" />
           <EntitySet Name="LinkMan" EntityType="Self.LinkMan" />
-          <EntitySet Name="RegisterInfo" EntityType="Self.RegisterInfo" />
           <EntitySet Name="SRType" EntityType="Self.SRType" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <EntitySet Name="RegisterInfo" EntityType="SRISDBModel.RegisterInfo" />
         </EntityContainer>
+        <EntityType Name="RegisterInfo">
+          <Key>
+            <PropertyRef Name="RegisterInfoID" />
+          </Key>
+          <Property Name="RegisterInfoID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BeSeekerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GetTaskDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegisterLink" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DNAState" Type="Int32" />
+          <Property Name="IsReturnTask" Type="Int32" Nullable="false" />
+          <Property Name="ReturnTaskDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ReturnReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsBBHJ" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SRTypeID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserInfoID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <Property Name="IsSuccess" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -250,30 +249,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RegisterInfo">
-            <EntityTypeMapping TypeName="SRISDBModel.RegisterInfo">
-              <MappingFragment StoreEntitySet="RegisterInfo">
-                <ScalarProperty Name="RegisterInfoID" ColumnName="RegisterInfoID" />
-                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="BeSeekerName" ColumnName="BeSeekerName" />
-                <ScalarProperty Name="GetTaskDateTime" ColumnName="GetTaskDateTime" />
-                <ScalarProperty Name="RegisterLink" ColumnName="RegisterLink" />
-                <ScalarProperty Name="PostLink" ColumnName="PostLink" />
-                <ScalarProperty Name="DNAState" ColumnName="DNAState" />
-                <ScalarProperty Name="IsReturnTask" ColumnName="IsReturnTask" />
-                <ScalarProperty Name="ReturnTaskDateTime" ColumnName="ReturnTaskDateTime" />
-                <ScalarProperty Name="ReturnReason" ColumnName="ReturnReason" />
-                <ScalarProperty Name="IsBBHJ" ColumnName="IsBBHJ" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
-                <ScalarProperty Name="SRTypeID" ColumnName="SRTypeID" />
-                <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SRType">
             <EntityTypeMapping TypeName="SRISDBModel.SRType">
               <MappingFragment StoreEntitySet="SRType">
@@ -290,6 +265,30 @@
                 <ScalarProperty Name="PassWord" ColumnName="PassWord" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisterInfo">
+            <EntityTypeMapping TypeName="SRISDBModel.RegisterInfo">
+              <MappingFragment StoreEntitySet="RegisterInfo">
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UserInfoID" ColumnName="UserInfoID" />
+                <ScalarProperty Name="SRTypeID" ColumnName="SRTypeID" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsBBHJ" ColumnName="IsBBHJ" />
+                <ScalarProperty Name="ReturnReason" ColumnName="ReturnReason" />
+                <ScalarProperty Name="ReturnTaskDateTime" ColumnName="ReturnTaskDateTime" />
+                <ScalarProperty Name="IsReturnTask" ColumnName="IsReturnTask" />
+                <ScalarProperty Name="DNAState" ColumnName="DNAState" />
+                <ScalarProperty Name="PostLink" ColumnName="PostLink" />
+                <ScalarProperty Name="RegisterLink" ColumnName="RegisterLink" />
+                <ScalarProperty Name="GetTaskDateTime" ColumnName="GetTaskDateTime" />
+                <ScalarProperty Name="BeSeekerName" ColumnName="BeSeekerName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+                <ScalarProperty Name="RegisterInfoID" ColumnName="RegisterInfoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

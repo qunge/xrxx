@@ -25,7 +25,7 @@ namespace SRIS.DAL
                 List<BBHJCaseModel> list = (from n in db.RegisterInfo
                                             join b in db.BBHJInfo on n.RegisterInfoID equals b.RegisterInfoID
                                             join t in db.SRType on n.SRTypeID equals t.SRTypeID
-                                            where (n.UserInfoID==userid && n.IsBBHJ == "1" && n.IsDelete == 0 && n.IsReturnTask == 0 && n.IsSuccess == 0)
+                                            where (n.UserInfoID==userid && n.IsBBHJ == 1 && n.IsDelete == 0 && n.IsReturnTask == 0 && n.IsSuccess == 0)
                                             orderby b.CreateDateTime descending
                                             select new BBHJCaseModel() {
                                                 BBHJCode =b.BBHJCode,
@@ -80,6 +80,8 @@ namespace SRIS.DAL
             using (var db = new SRISDBEntities())
             {
                 db.BBHJInfo.Add(model);
+                RegisterInfo info = db.RegisterInfo.Find(model.RegisterInfoID);
+                info.IsBBHJ = 1;
                 db.SaveChanges();
                 return true;
             }

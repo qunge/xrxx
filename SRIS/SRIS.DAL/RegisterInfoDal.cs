@@ -31,7 +31,7 @@ namespace SRIS.DAL
                 List<RegisterModel> list = (from n in db.RegisterInfo
                                            join p in db.SRType
                                            on n.SRTypeID equals p.SRTypeID
-                                           where n.UserInfoID == userId && n.IsReturnTask == 0 && n.IsBBHJ == "0" && n.IsDelete == 0 && n.IsSuccess == 0
+                                           where n.UserInfoID == userId && n.IsReturnTask == 0 && n.IsBBHJ == 0 && n.IsDelete == 0 && n.IsSuccess == 0
                                            orderby n.GetTaskDateTime descending
                                            select new RegisterModel() { RegisterInfo=n,SRTypeName=p.SRTypeName}).ToList();
 
@@ -75,7 +75,7 @@ namespace SRIS.DAL
                 List<RegisterModel> list = (from n in db.RegisterInfo
                                             join p in db.SRType
                                             on n.SRTypeID equals p.SRTypeID
-                                            where n.UserInfoID == userId && n.IsReturnTask == 0 && n.IsBBHJ == "0" && n.IsDelete == 0 && n.IsSuccess == 0
+                                            where n.UserInfoID == userId && n.IsReturnTask == 0 && n.IsBBHJ == 0 && n.IsDelete == 0 && n.IsSuccess == 0
                                             orderby n.GetTaskDateTime descending
                                             select new RegisterModel() { RegisterInfo = n, SRTypeName = p.SRTypeName }).ToList();
                 return list;
@@ -236,6 +236,8 @@ namespace SRIS.DAL
                 md.Remarks = model.Remarks;
                 md.SRTypeID = model.SRTypeID;
                 md.Title = model.Title;
+                md.IsReturnTask = model.IsReturnTask;
+                md.ReturnReason = model.ReturnReason;
                 db.SaveChanges();
                 return true;
             }
@@ -271,7 +273,7 @@ namespace SRIS.DAL
                 {
                     // 修改案例状态为宝贝回家案例
                     RegisterInfo model = db.RegisterInfo.Find(id);
-                    model.IsBBHJ = "1";
+                    model.IsBBHJ = 1;
 
                     // 宝贝回家表添加数据
                     BBHJInfo bbModel = new BBHJInfo()

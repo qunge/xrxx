@@ -54,7 +54,7 @@ namespace SRIS.Controllers
                     model.BeSeekerName = item.RegisterInfo.BeSeekerName;
                     model.CaseCode = item.RegisterInfo.CaseCode;
                     model.getTaskDate = item.RegisterInfo.GetTaskDateTime.ToShortDateString();
-                    model.IsBBHJ = item.RegisterInfo.IsBBHJ;
+                    model.IsBBHJ = item.RegisterInfo.IsBBHJ.ToString();
                     model.IsReturnTask = item.RegisterInfo.IsReturnTask;
                     model.PostLink = item.RegisterInfo.PostLink;
                     model.RegisterInfoId = item.RegisterInfo.RegisterInfoID;
@@ -126,7 +126,7 @@ namespace SRIS.Controllers
                             CreateDateTime = DateTime.Now,
                             DNAState = null,
                             GetTaskDateTime = model.GetTaskDateTime,
-                            IsBBHJ = "0",
+                            IsBBHJ = 0,
                             IsReturnTask = 0,
                             PostLink = "",
                             RegisterLink = model.RegisterLink,

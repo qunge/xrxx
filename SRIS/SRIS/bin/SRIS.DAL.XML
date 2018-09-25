@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SRIS.DAL</name>
+    </assembly>
+    <members>
+        <member name="T:SRIS.DAL.BBHJCaseDal">
+            <summary>
+            宝贝回家案例操作类
+            </summary>
+        </member>
+        <member name="M:SRIS.DAL.BBHJCaseDal.GetAllBBHJCase(System.String,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32@)">
+            <summary>
+            获取所有的宝贝回家案例
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.BBHJCaseDal.CreateBBHJCase(SRIS.Framework.BBHJInfo)">
+            <summary>
+            创建宝贝回家案例
+            </summary>
+            <param name="model">宝贝回家案例实体类</param>
+            <returns></returns>
+        </member>
+        <member name="T:SRIS.DAL.FollowDetailsDal">
+            <summary>
+            跟进详情操作类
+            </summary>
+        </member>
+        <member name="M:SRIS.DAL.FollowDetailsDal.GetList(System.String)">
+            <summary>
+            通过案例ID获取该案例的跟进信息
+            </summary>
+            <param name="id">案例ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.FollowDetailsDal.CreateFollowDetail(System.String,System.String,System.String)">
+            <summary>
+            新建跟进信息
+            </summary>
+            <param name="imageUrl">上传图片</param>
+            <param name="gjxx">跟进信息</param>
+            <param name="id">案例ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.FollowDetailsDal.DelFollowDetail(System.String)">
+            <summary>
+            删除跟进信息
+            </summary>
+            <param name="id">跟进信息ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.FollowDetailsDal.GetModel(System.String)">
+            <summary>
+            通过跟进信息ID获取跟进信息
+            </summary>
+            <param name="id">跟进信息ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.FollowDetailsDal.UpdateFollowDetails(SRIS.Framework.FollowDetails)">
+            <summary>
+            修改案例跟进信息
+            </summary>
+            <param name="model">案例跟进信息实体类</param>
+            <returns></returns>
+        </member>
+        <member name="T:SRIS.DAL.RegisterInfoDal">
+            <summary>
+            登记案例的信息操作类
+            </summary>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.GetAllCaseInfo(System.String,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32@)">
+            <summary>
+            获取所有的登记案例的信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.GetAllCaseInfo(System.String)">
+            <summary>
+            获取所有的登记案例的信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.GetRegisterInfoById(System.String)">
+            <summary>
+            通过案例ID获取案例信息
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.GetSRType">
+            <summary>
+            获取所有的案例类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.CreateRegister(SRIS.Framework.RegisterInfo)">
+            <summary>
+            创建一条案例信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.GetSRTypeById(System.String)">
+            <summary>
+            通过案例类型ID获取案例类型
+            </summary>
+            <param name="id">例类型ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.GetLinManModelById(System.String)">
+            <summary>
+            通过案例ID获取联系人信息
+            </summary>
+            <param name="CaseId">案例ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.CreateLinkMan(SRIS.Framework.LinkMan)">
+            <summary>
+            创建联系人信息
+            </summary>
+            <param name="model">联系人信息实体类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.UpdateLinkMan(SRIS.Framework.LinkMan)">
+            <summary>
+            修改联系人信息
+            </summary>
+            <param name="model">联系人信息实体类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.UpdateRegisterInfo(SRIS.Framework.RegisterInfo)">
+            <summary>
+            修改案例信息
+            </summary>
+            <param name="model">案例信息实体类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.DelRegisterInfo(System.String)">
+            <summary>
+            删除案例登记信息
+            </summary>
+            <param name="id">案例登记ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.Bbhj(System.String)">
+            <summary>
+            设置为宝贝回家案例
+            </summary>
+            <param name="id">要设置的案例ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.RegisterInfoDal.SetSuccess(System.String)">
+            <summary>
+            设置为成功案例
+            </summary>
+            <param name="id">案例ID</param>
+            <returns></returns>
+        </member>
+        <member name="T:SRIS.DAL.ReturnCaseDal">
+            <summary>
+            已退任务操作类
+            </summary>
+        </member>
+        <member name="M:SRIS.DAL.ReturnCaseDal.GetAllCaseInfo(System.String,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32@)">
+            <summary>
+            获取已退任务
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="page">当前页号</param>
+            <param name="limit">分页大小</param>
+            <param name="whereDic">查询条件</param>
+            <param name="pageCount">总页数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SRIS.DAL.SuccessCaseDal">
+            <summary>
+            成功案例信息操作类
+            </summary>
+        </member>
+        <member name="M:SRIS.DAL.SuccessCaseDal.GetList(System.String,System.Int32,System.Int32,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32@)">
+            <summary>
+            获取成功案例信息
+            </summary>
+            <param name="userId">用户ID</param>
+            <param name="page">当前页号</param>
+            <param name="limit">分页大小</param>
+            <param name="pageCount">总页数</param>
+            <param name="whereDic">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="T:SRIS.DAL.UserInfoDal">
+            <summary>
+            用户信息操作类
+            </summary>
+        </member>
+        <member name="M:SRIS.DAL.UserInfoDal.Register(SRIS.Framework.UserInfo)">
+            <summary>
+            新用户注册
+            </summary>
+            <param name="model">用户注册信息实体类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SRIS.DAL.UserInfoDal.GetUserInfoByUserName(System.String)">
+            <summary>
+            通过用户名查询用户信息
+            </summary>
+            <param name="userName">用户名</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

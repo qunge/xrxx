@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SRIS.Model</name>
+    </assembly>
+    <members>
+        <member name="T:SRIS.Model.BBHJCaseModel">
+            <summary>
+            宝贝回家案例实体类
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.BBHJInfoID">
+            <summary>
+            宝贝回家案例ID
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.RegisterInfoId">
+            <summary>
+            登记案例ID
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.CaseCode">
+            <summary>
+            等着我案例编号
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.SRTypeID">
+            <summary>
+            寻亲类别ID
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.SRTypeName">
+            <summary>
+            寻亲类别名称
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.BeSeekerName">
+            <summary>
+            被寻人姓名
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.GetTaskDate">
+            <summary>
+            领任务时间
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.RegisterLink">
+            <summary>
+            登记信息链接
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.GuideTime">
+            <summary>
+            引导到宝贝回家时间
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.BBHJCode">
+            <summary>
+            宝贝回家编号
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.Volunteer">
+            <summary>
+            跟进志愿者
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.BBHJCaseModel.Remarks">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="T:SRIS.Model.FollowDetailsModel">
+            <summary>
+            跟进详情实体类
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.FollowDetailsModel.Id">
+            <summary>
+            跟进ID
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.FollowDetailsModel.CaseId">
+            <summary>
+            案例ID
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.FollowDetailsModel.MesText">
+            <summary>
+            跟进信息
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.FollowDetailsModel.ImageUrl">
+            <summary>
+            图片地址
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.FollowDetailsModel.CreateDataTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:SRIS.Model.RegisterModel">
+            <summary>
+            案例信息实体类
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.RegisterModel.RegisterInfo">
+            <summary>
+            案例信息
+            </summary>
+        </member>
+        <member name="P:SRIS.Model.RegisterModel.SRTypeName">
+            <summary>
+            案例类别名称
+            </summary>
+        </member>
+    </members>
+</doc>
